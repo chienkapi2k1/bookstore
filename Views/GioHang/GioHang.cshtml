@@ -1,0 +1,248 @@
+﻿@using BookStore.Models
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    double tongtien = 0;
+    foreach (var item in Model)
+    {
+        tongtien += item.ThanhTien;
+    }
+}
+
+<div class="classright-sidebar woocommerce-cart">
+    <div class="site-content bg-punch-light overflow-hidden" id="content">
+        <div class="container">
+            <header class="entry-header space-top-2 space-bottom-1 mb-2">
+                <h1 class="entry-title font-size-7">Giỏ hàng của bạn có: @Model.Count() sản phẩm</h1>
+            </header>
+            <div class="row pb-8">
+                <div id="primary" class="content-area" style="width:65%;">
+                    <main id="main" class="site-main ">
+                        <div class="page type-page status-publish hentry">
+
+                            <div class="entry-content">
+                                <div class="woocommerce">
+                                    <form style="margin: 0 20px 0 40px;" class="woocommerce-cart-form table-responsive" action="#" method="post">
+                                        <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents">
+                                            <thead>
+                                                <tr>
+                                                    <th @*style="width:430px;"*@ class="product-name">Sách</th>
+                                                    <th @*style="width:130px;"*@ class="product-price">Giá Tiền</th>
+                                                    <th @*style="width:200px;"*@ class="product-quantity">Số Lượng</th>
+                                                    <th @*style="width:135px;"*@ class="product-subtotal">Tổng</th>
+                                                    <th @*style="width:90px;"*@ class="product-remove">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @*@using (Html.BeginForm("CapNhatGioHang", "GioHang", new { sMaSP = item.sMaSP }))
+                                                    {*@
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr MaSach="@item.MaSach" class="tr-sach woocommerce-cart-form__cart-item cart_item">
+                                                        <td class="product-name" data-title="Product">
+                                                            <div class="d-flex align-items-center">
+                                                                <a href="#">
+                                                                    <img style="width:72px;height:105px;" src="@Url.Content("~/Images/book/" + item.Anh)" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">
+                                                                </a>
+                                                                <div class="ml-3 m-w-200-lg-down">
+                                                                    <a href="#">@item.TenSach</a>
+                                                                    <a href="#" class="text-gray-700 font-size-2 d-block" tabindex="0">@item.TacGia</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-price" data-title="Price">
+                                                            <span class="woocommerce-Price-amount amount">@String.Format("{0:N0}", item.GiaTriSach)<span class="woocommerce-Price-currencySymbol">₫</span></span>
+                                                        </td>
+                                                        <td class="product-quantity" data-title="Quantity">
+                                                            <div class="quantity d-flex align-items-center">
+
+                                                                <div class="border px-3 width-120">
+                                                                    <div class="js-quantity">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <label class="screen-reader-text sr-only">Quantity</label>
+                                                                            @*<a class="js-minus text-dark" href="javascript:;">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10px" height="1px">
+                                                                                        <path fill-rule="evenodd" fill="rgb(22, 22, 25)" d="M-0.000,-0.000 L10.000,-0.000 L10.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z" />
+                                                                                    </svg>
+                                                                                </a>*@
+
+                                                                            <input type="number" class="input-text qty text js-result form-control text-center border-0" value="@item.SoLuong" min="1" max="100" step="1" name="SoLuong" id="SoLuong" title="Số Lượng">
+                                                                            @*<a class="js-plus text-dark" href="javascript:;">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10px" height="10px">
+                                                                                        <path fill-rule="evenodd" fill="rgb(22, 22, 25)" d="M10.000,5.000 L6.000,5.000 L6.000,10.000 L5.000,10.000 L5.000,5.000 L-0.000,5.000 L-0.000,4.000 L5.000,4.000 L5.000,-0.000 L6.000,-0.000 L6.000,4.000 L10.000,4.000 L10.000,5.000 Z" />
+                                                                                    </svg>
+                                                                                </a>*@
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-subtotal" data-title="Total">
+                                                            <span class="woocommerce-Price-amount amount">@String.Format("{0:N0}", item.ThanhTien)<span class="woocommerce-Price-currencySymbol">₫</span></span>
+                                                        </td>
+                                                        <td class="product-remove">
+                                                            <a href="@Url.Action("XoaSach_GioHang", "GioHang", new { @MaSach = item.MaSach })" class="remove" aria-label="Remove this item">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px">
+                                                                    <path fill-rule="evenodd" fill="rgb(22, 22, 25)" d="M15.011,13.899 L13.899,15.012 L7.500,8.613 L1.101,15.012 L-0.012,13.899 L6.387,7.500 L-0.012,1.101 L1.101,-0.012 L7.500,6.387 L13.899,-0.012 L15.011,1.101 L8.613,7.500 L15.011,13.899 Z" />
+                                                                </svg>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                                <tr>
+                                                    <td colspan="5" class="actions">
+                                                        @*<button></button>*@
+                                                        <input type="submit" class="button capnhat_giohang" name="update_cart" value="Cập Nhật Giỏ Hàng">
+                                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="db025d7a70"><input type="hidden" name="_wp_http_referer" value="/storefront/cart/">
+                                                    </td>
+                                                </tr>
+                                                @*}*@
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </main>
+                </div>
+
+                <div id="secondary" class="sidebar cart-collaterals order-1" role="complementary" style="margin: 0 0 0 50px; width:30%;">
+                    <div id="cartAccordion" class="border border-gray-900 bg-white mb-5">
+                        <div class="p-4d875 border">
+                            <div id="cartHeadingOne" class="cart-head">
+                                <h3 class="cart-title mb-0 font-weight-medium font-size-3">Giỏ Hàng</h3>
+                            </div>
+                            <div id="cartCollapseOne" class="mt-4 cart-content collapse show" aria-labelledby="cartHeadingOne" data-parent="#cartAccordion">
+                                <table class="shop_table shop_table_responsive">
+                                    <tbody>
+                                        @{
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <th>@item.TenSach <strong>× @item.SoLuong</strong> </th>
+                                                    <td data-title="Subtotal"><span class="woocommerce-Price-amount amount">@String.Format("{0:N0}", item.ThanhTien)<span class="woocommerce-Price-currencySymbol"> ₫</span></span></td>
+                                                </tr>
+                                            }
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="p-4d875 border">
+                            <div id="cartCollapseOne" class="mt-4 cart-content collapse show" aria-labelledby="cartHeadingOne" data-parent="#cartAccordion">
+                                <table class="shop_table shop_table_responsive">
+                                    <tbody>
+                                        <tr class="cart-subtotal">
+                                            <th style="width:30%">Tổng Giá Sách</th>
+                                            <td data-title="Subtotal"><strong><span class="woocommerce-Price-amount amount">@String.Format("{0:N0}", tongtien)<span class="woocommerce-Price-currencySymbol"> ₫</span></span></strong></td>
+                                        </tr>
+                                        <tr class="order-shipping">
+                                            <th>Giao Hàng</th>
+                                            <td data-title="Shipping" style="color: #00a02c">Miễn Phí</td>
+                                        </tr>
+                                        @if (Session["TaiKhoan"] != null && Session["DiaChi"] != null)
+                                        {
+                                            <tr class="order-shipping">
+                                                <th>Địa Chỉ</th>
+                                                <td data-title="Shipping" style="width:90%">@Session["DiaChi"].ToString() - <p style="word-wrap: break-word; float:right;"><a href="@Url.Action("ChinhSuaTaiKhoan","NguoiDung")">Sửa</a></p></td>
+                                            </tr>
+
+                                        }
+                                        @if (Session["TaiKhoan"] != null && Session["DiaChi"] == null)
+                                        {
+                                            <tr class="order-shipping">
+                                                <th>Địa Chỉ</th>
+                                                <td>
+                                                    <a href="@Url.Action("ChinhSuaTaiKhoan","NguoiDung")">Cung Cấp Địa Chỉ</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="p-4d875 border">
+                            <div id="cartHeadingThree" class="cart-head">
+                                <h3 class="cart-title mb-0 font-weight-medium font-size-3">Phương Thức Thành Toán</h3>
+                            </div>
+                            <div id="cartCollapseThree" class="mt-4 cart-content collapse show" aria-labelledby="cartHeadingThree" data-parent="#cartAccordion">
+                                <table class="shop_table shop_table_responsive">
+                                    <tbody>
+                                        <tr class="cart-subtotal">
+                                            <th>Tiền Mặt</th>
+                                            <td data-title="Shipping" style="color:#00a02c">Trả tiền khi nhận hàng</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="p-4d875 border">
+                            <table class="shop_table shop_table_responsive">
+                                <tbody>
+                                    <tr class="order-total" style="font-size:25px;">
+                                        <th>Tổng Tiền</th>
+                                        <td data-title="Total"><strong><span class="woocommerce-Price-amount amount">@String.Format("{0:N0}", tongtien)<span class="woocommerce-Price-currencySymbol"> ₫</span></span></strong> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                    
+                    <div class="wc-proceed-to-checkout">
+                        <a href="@Url.Action("DatHang","GioHang")" class="checkout-button button alt wc-forward btn btn-dark btn-block rounded-0 py-4">Đặt Hàng</a>
+                    </div>
+                    <br />
+                    @if (Session["TaiKhoan"] == null)
+                    {
+                        <strong style="margin-bottom:10px;">Bạn cần <a href="@Url.Action("DangNhap","NguoiDung")">Đăng Nhập</a> để chúng tôi biết địa chỉ giao hàng</strong>
+                    }
+                    @if (Session["TaiKhoan"] != null && Session["DiaChi"] == null)
+                    {
+                        <strong>Bạn cần cung cấp Địa Chỉ của mình</strong>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // cập nhật giỏ hàng
+            $('.capnhat_giohang').click(function () {
+                var listMaSach = [];
+                var listSL = [];
+                $(".tr-sach").each(function () {
+                    listMaSach.push($(this).attr("MaSach"));
+                    listSL.push($(this).find("input[Name=SoLuong]").val());
+                });
+
+                $.ajax({
+                    url: "/GioHang/CapNhatGioHang",
+                    type: "POST",
+                    data: {
+                        listMaSach: listMaSach,
+                        listSL: listSL
+                    },
+                    dataType: "json",
+                    success: function (mess) {
+                        if (mess == "200") {
+                            alert("Cập nhật giỏ hàng thành công !");
+                            window.location.href = "/GioHang/GioHang";
+                        }
+                    },
+                    error: function () {
+                        alert("Cập nhật giỏ hàng không thành công !");
+                    }
+                });
+            });
+        })
+    </script>
+}

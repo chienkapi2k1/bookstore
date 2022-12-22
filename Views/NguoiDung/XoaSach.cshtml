@@ -1,0 +1,171 @@
+﻿@model BookStore.Models.Sach
+
+@{
+    ViewBag.Title = "Xóa Sách";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<main id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 border-right">
+                <h6 class="font-weight-medium font-size-7 pt-5 pt-lg-8  mb-5 mb-lg-7">Tài Khoản Của Bạn</h6>
+                <div class="tab-wrapper">
+                    <ul class="my__account-nav nav flex-column mb-0" role="tablist" id="pills-tab">
+                        @if (Session["Role"].ToString() == "ADMIN")
+                        {
+                            <li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0 active" id="pills-one-example1-tab" href="@Url.Action("BangDieuKhien","NguoiDung")" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Bảng Điều Khiển</span>
+                                </a>
+                            </li>
+                        }
+
+                        @*<li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-two-example1-tab" href="#pills-two-example1" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đơn Hàng</span>
+                            </a>
+                        </li>*@
+                        @*<li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" id="pills-three-example1-tab" href="#pills-three-example1" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Tải Xuống</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" id="pills-four-example1-tab" href="#pills-four-example1" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Địa Chỉ</span>
+                                </a>
+                            </li>*@
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChiTietTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chi Tiết Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChinhSuaTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chỉnh Sửa Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("DoiMatKhau","NguoiDung")" role="tab" aria-controls="pills-five-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đổi Mật Khẩu</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-six-example1-tab" href="@Url.Action("DanhSachYeuThich","NguoiDung")" role="tab" aria-controls="pills-six-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Danh Sách Yêu Thích</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" href="@Url.Action("DangXuat", "NguoiDung")">
+                                <span class="font-weight-normal text-gray-600">Đăng Xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="tab-content" id="pills-tabContent">
+
+                    <div class="" id="pills-eight-example1" role="tabpanel" aria-labelledby="pills-eight-example1-tab">
+                        <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9 space-bottom-2 mb-lg-4">
+                            <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-5 mb-lg-8 pb-xl-1">Xóa Sách</h6>
+                            <h3>Are you sure you want to delete this?</h3>
+                            <div>
+                                <hr />
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th style="width:200px;">Thuộc Tính </th>
+                                            <th>Nội Dung </th>
+
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.MaSach)</th>
+                                                <td>@Html.DisplayFor(model => model.MaSach)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.TenSach)</th>
+                                                <td>@Html.DisplayFor(model => model.TenSach)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.TacGia)</th>
+                                                <td>@Html.DisplayFor(model => model.TacGia)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.NamXB)</th>
+                                                <td>@Html.DisplayFor(model => model.NamXB)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.LanXB)</th>
+                                                <td>@Html.DisplayFor(model => model.LanXB)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.TomTat)</th>
+                                                <td>@Html.DisplayFor(model => model.TomTat)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.TongSoTrang)</th>
+                                                <td>@Html.DisplayFor(model => model.TongSoTrang)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.SoLuong)</th>
+                                                <td>@Html.DisplayFor(model => model.SoLuong)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.Tap)</th>
+                                                <td>@Html.DisplayFor(model => model.Tap)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.TongSoTap)</th>
+                                                <td>@Html.DisplayFor(model => model.TongSoTap)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.GiaTriSach)</th>
+                                                <td>@Html.DisplayFor(model => model.GiaTriSach)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.GiamGia)</th>
+                                                <td>@Html.DisplayFor(model => model.GiamGia)%</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.DanhGia) (/5⭐)</th>
+                                                <td>@Html.DisplayFor(model => model.DanhGia) ⭐ </td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.GioiThieu)</th>
+                                                <td>@Html.DisplayFor(model => model.GioiThieu)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.TrangThai)</th>
+                                                <td>@Html.DisplayFor(model => model.TrangThai)</td>
+                                            </tr>
+                                            <tr class="alert" role="alert">
+                                                <th scope="row">@Html.DisplayNameFor(model => model.Anh)</th>
+                                                <td><img style="width:72px;height:105px;" src="@Url.Content("~/Images/book/" + Model.Anh)" alt="Alternate Text" /></td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-actions no-color">
+                                        <input type="submit" value="Delete" style="background-color:#dfdfdf" class="btn btn-default" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

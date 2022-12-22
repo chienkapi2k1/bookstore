@@ -1,0 +1,282 @@
+﻿@model BookStore.Models.Sach
+
+@{
+    ViewBag.Title = "Thêm Sách";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<main id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 border-right">
+                <h6 style="font-size : 20px;" class="font-weight-medium font-size-5 pt-5 pt-lg-8  mb-2 mb-lg-3">Tài Khoản Của Bạn</h6>
+                <div class="tab-wrapper">
+                    <ul class="my__account-nav nav flex-column mb-0" role="tablist" id="pills-tab">
+                        @if (Session["Role"].ToString() == "ADMIN")
+                        {
+                            <li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0 active" id="pills-one-example1-tab" href="@Url.Action("BangDieuKhien","NguoiDung")" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Bảng Điều Khiển</span>
+                                </a>
+                            </li>
+                        }
+
+                        @*<li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-two-example1-tab" href="#pills-two-example1" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đơn Hàng</span>
+                            </a>
+                        </li>*@
+                        @*<li class="nav-item mx-0">
+                    <a class="nav-link d-flex align-items-center px-0" id="pills-three-example1-tab" href="#pills-three-example1" role="tab" aria-selected="false">
+                        <span class="font-weight-normal text-gray-600">Tải Xuống</span>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link d-flex align-items-center px-0" id="pills-four-example1-tab" href="#pills-four-example1" role="tab" aria-selected="false">
+                        <span class="font-weight-normal text-gray-600">Địa Chỉ</span>
+                    </a>
+                </li>*@
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChiTietTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chi Tiết Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChinhSuaTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chỉnh Sửa Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("DoiMatKhau","NguoiDung")" role="tab" aria-controls="pills-five-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đổi Mật Khẩu</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-six-example1-tab" href="@Url.Action("DanhSachYeuThich","NguoiDung")" role="tab" aria-controls="pills-six-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Danh Sách Yêu Thích</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" href="@Url.Action("DangXuat", "NguoiDung")">
+                                <span class="font-weight-normal text-gray-600">Đăng Xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="tab-content" id="pills-tabContent">
+
+                    <div class="" id="pills-eight-example1" role="tabpanel" aria-labelledby="pills-eight-example1-tab">
+                        <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9 space-bottom-2 mb-lg-4">
+                            <div class="mb-4">
+                                <p class="mb-0 font-size-2 ml-lg-1 text-gray-600"></p>
+                            </div>
+                            <div class="row no-gutters row-cols-1 row-cols-md-12 row-cols-lg-12">
+                                <div class="row">
+                                    <div class="border py-1 text-center" style="float:left; width:200px; margin:10px;">
+                                        <a href="@Url.Action("QuanLySach","NguoiDung")" class="btn  rounded-circle px-4 mb-2">
+                                            @*btn-primary*@
+                                            <span class=" font-size-10 btn-icon__inner text-primary">
+                                                <img style="width:50px; height:50px;" src="~/Images/icon/list-ul.svg" />
+                                            </span>
+                                            <br />
+                                            <div style="margin-top:20px;" class="font-size-3 mb-xl-1">Danh sách Sách</div>
+                                        </a>
+                                    </div>
+                                    <div class="border py-1 text-center" style="float:left; width:200px; margin:10px;">
+                                        <a href="@Url.Action("ThemSach","NguoiDung")" class="btn  rounded-circle px-4 mb-2">
+                                            @*btn-primary*@
+                                            <span class=" font-size-10 btn-icon__inner text-primary">
+                                                <img style="width:50px; height:50px;" class="rounded-circle shadow-lg" src="~/Images/icon/them.svg" />
+                                            </span>
+                                            <br />
+                                            <div style="margin-top:20px;" class="font-size-3 mb-xl-1">Thêm Sách</div>
+                                        </a>
+                                    </div>
+                                    <div class="border py-1 text-center" style="float: left; width: 200px; margin: 10px;">
+                                        <a href="@Url.Action("DSCTTheLoai","NguoiDung")" class="btn  rounded-circle px-4 mb-2">
+                                            @*btn-primary*@
+                                            <span class=" font-size-10 btn-icon__inner text-primary">
+                                                <img style="width:50px; height:50px;" src="~/Images/icon/list-ul.svg" />
+                                            </span>
+                                            <br />
+                                            <div style="margin-top:20px;" class="font-size-3 mb-xl-1">Danh Sách Chi Tiết Thể Loại</div>
+                                        </a>
+                                    </div>
+
+                                    <div class="border py-1 text-center" style="float: left; width: 200px; margin: 10px;">
+                                        <a href="@Url.Action("ThemCTTheLoai","NguoiDung")" class="btn  rounded-circle px-4 mb-2">
+                                            @*btn-primary*@
+                                            <span class=" font-size-10 btn-icon__inner text-primary">
+                                                <img style="width:50px; height:50px;" class="rounded-circle shadow-lg" src="~/Images/icon/them.svg" />
+                                            </span>
+                                            <br />
+                                            <div style="margin-top:20px;" class="font-size-3 mb-xl-1">Thêm Chi Tiết Thể Loại</div>
+                                        </a>
+                                    </div>
+
+                                    <div class="border py-1 text-center" style="float: left; width: 200px; margin: 10px;">
+                                        <a href="@Url.Action("DSTheLoai","NguoiDung")" class="btn  rounded-circle px-4 mb-2">
+                                            @*btn-primary*@
+                                            <span class=" font-size-10 btn-icon__inner text-primary">
+                                                <img style="width:50px; height:50px;" src="~/Images/icon/list-ul.svg" />
+                                            </span>
+                                            <br />
+                                            <div style="margin-top:20px;" class="font-size-3 mb-xl-1">Danh Sách Thể Loại</div>
+                                        </a>
+                                    </div>
+                                    <div class="border py-1 text-center" style="float: left; width: 200px; margin: 10px;">
+                                        <a href="@Url.Action("ThemTheLoai","NguoiDung")" class="btn  rounded-circle px-4 mb-2">
+                                            @*btn-primary*@
+                                            <span class=" font-size-10 btn-icon__inner text-primary">
+                                                <img style="width:50px; height:50px;" class="rounded-circle shadow-lg" src="~/Images/icon/them.svg" />
+                                            </span>
+                                            <br />
+                                            <div style="margin-top:20px;" class="font-size-3 mb-xl-1">Thêm Thể Loại</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-5 mb-lg-8 pb-xl-1">Thêm Sách</h6>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TenSach, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TacGia, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TacGia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.NamXB, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.NamXB, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.NamXB, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.LanXB, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.LanXB, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.LanXB, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TomTat, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.TomTat, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TomTat, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TongSoTrang, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.TongSoTrang, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TongSoTrang, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SoLuong, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Tap, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Tap, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Tap, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TongSoTap, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.TongSoTap, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TongSoTap, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.GiaTriSach, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.GiaTriSach, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.GiaTriSach, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.GiamGia, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.GiamGia, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.GiamGia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.DanhGia, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.DanhGia, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.DanhGia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.GioiThieu, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.GioiThieu, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.GioiThieu, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.TrangThai, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Anh, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @id = "imageFile", Type = "file" } })
+                                            @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" style="background-color:#dfdfdf" value="Thêm Mới" class="btn btn-default" />
+                                        </div>
+                                    </div>
+                                </div>
+                                                }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

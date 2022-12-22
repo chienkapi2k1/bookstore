@@ -1,0 +1,12 @@
+﻿<a href="@Url.Action("GioHang","GioHang")" class=" btn btn-block py-3 rounded-0 btn-outline-dark font-weight-medium" data-target="#signup" data-link-group="idForm" data-animation-in="fadeIn">
+    @if (@ViewBag.TongSoLuong == null)
+    {
+        <span style="right: 50px;top: 14px;" class="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 ">0</span>
+    }
+    else
+    {
+        <span style="right: 50px;top: 14px;" class="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 ">@ViewBag.TongSoLuong</span>
+    }
+
+    <i class="glph-icon flaticon-icon-126515"></i>
+</a>

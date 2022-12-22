@@ -1,0 +1,163 @@
+﻿@model BookStore.Models.NguoiDung
+@{
+    ViewBag.Title = "Chỉnh Sửa Tài Khoản";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@section style{
+    <style>
+        input[type=radio] {
+            border: 0px;
+            width: 3%;
+            height: 1.2em;
+            margin-top: 15px;
+        }
+    </style>
+}
+
+<main id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 border-right">
+                <h6 style="font-size : 20px;" class="font-weight-medium font-size-7 pt-5 pt-lg-8  mb-5 mb-lg-7">Tài Khoản Của Bạn</h6>
+                <div class="tab-wrapper">
+                    <ul class="my__account-nav nav flex-column mb-0" role="tablist" id="pills-tab">
+                        @if (Session["Role"].ToString() == "ADMIN")
+                        {
+                            <li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0 active" id="pills-one-example1-tab" href="@Url.Action("BangDieuKhien","NguoiDung")" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Bảng Điều Khiển</span>
+                                </a>
+                            </li>
+                        }
+                        @*<li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-two-example1-tab" href="@Url.Action("DonHang","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đơn Hàng</span>
+                            </a>
+                        </li>*@
+                        @*<li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-three-example1-tab" href="#pills-three-example1" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Tải Xuống</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-four-example1-tab" href="#pills-four-example1" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Địa Chỉ</span>
+                            </a>
+                        </li>*@
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChiTietTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chi Tiết Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChinhSuaTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chỉnh Sửa Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("DoiMatKhau","NguoiDung")" role="tab" aria-controls="pills-five-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đổi Mật Khẩu</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-six-example1-tab" href="@Url.Action("DanhSachYeuThich","NguoiDung")" role="tab" aria-controls="pills-six-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Danh Sách Yêu Thích</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" href="@Url.Action("DangXuat", "NguoiDung")">
+                                <span class="font-weight-normal text-gray-600">Đăng Xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="tab-content" id="pills-tabContent">
+                    <div id="pills-five-example1" role="tabpanel" aria-labelledby="pills-five-example1-tab">
+                        <div class="border-bottom mb-6 pb-6 mb-lg-8 pb-lg-9 space-bottom-2 mb-lg-4">
+                            <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9">
+                                <div class="font-weight-medium font-size-22 mb-4 pb-xl-1">Chỉnh Sửa Tài Khoản</div>
+
+                                <form action="@Url.Action("ChinhSuaTaiKhoan", "NguoiDung")" method="post" id="form1">
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                    <div class="row">
+                                        <div class="col-md-12 mb-4">
+                                            <div class="js-form-message">
+                                                <label for="exampleFormControlInput1">Họ Tên *</label>
+                                                @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                                                <input type="text" class="form-control rounded-0 pl-3 placeholder-color-3" id="HoTen" name="HoTen" aria-label="Jack Wayley" value="@Model.HoTen" required="" data-error-class="u-has-error" data-msg="Nhập Tên Của Bạn" data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="js-form-message">
+                                                <label for="exampleFormControlInput2">Giới Tính * : </label>
+                                                @if (Model.GioiTinh == "Nữ")
+                                                {
+                                                    <input style=" margin-left:20px;" type="radio" value="Nam" id="GioiTinh" name="GioiTinh">
+                                                    <label>Nam</label>
+                                                    <input style=" margin-left:15px;" type="radio" value="Nữ" id="GioiTinh" name="GioiTinh" checked>
+                                                    <label>Nữ</label>
+                                                }
+                                                else
+                                                {
+                                                    <input style=" margin-left:20px;" type="radio" value="Nam" id="GioiTinh" name="GioiTinh" checked>
+                                                    <label>Nam</label>
+                                                    <input style=" margin-left:15px;" type="radio" value="Nữ" id="GioiTinh" name="GioiTinh">
+                                                    <label>Nữ</label>
+                                                }
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="js-form-message">
+                                                <label for="exampleFormControlInput3">Tuổi *</label>
+                                                @Html.ValidationMessageFor(model => model.Tuoi, "", new { @class = "text-danger" })
+                                                <input type="number" class="form-control rounded-0" name="Tuoi" value="@Model.Tuoi" aria-label="Jack Wayley" id="Tuoi" required="" data-error-class="u-has-error" data-msg="Nhập Tuổi Của Bạn." data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4 ">
+                                            <div class="js-form-message">
+                                                <label for="exampleFormControlInput4">Email *</label>
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                <input type="email" class="form-control rounded-0" name="Email" value="@Model.Email" id="Email" aria-label="Jack Wayley" required="" data-error-class="u-has-error" data-msg="Nhập Email Của Bạn." data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4 ">
+                                            <div class="js-form-message">
+                                                <label for="exampleFormControlInput4">Số Điện Thoại *</label>
+                                                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                                                <input class="form-control rounded-0" name="SDT" value="@Model.SDT" id="SDT" aria-label="Jack Wayley" required="" data-error-class="u-has-error" data-msg="Please enter your name." data-success-class="u-has-success">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="js-form-message">
+                                                <label for="exampleFormControlInput4">Địa Chỉ *</label>
+                                                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                                                <input class="form-control rounded-0" name="DiaChi" value="@Model.DiaChi" id="DiaChi" aria-label="Jack Wayley" required="" data-error-class="u-has-error" data-msg="Nhập Địa Chỉ Của Bạn" data-success-class="u-has-success">
+                                                <label style="font-size: 18px; color:#b80000">*Chúng tôi sẽ giao hàng qua địa chỉ mà bạn cung cấp!!!</label>
+                                            </div>
+                                        </div>
+                                        <div class="ml-4">
+                                            @*<button type="submit" style="background-color:#dfdfdf" form="form1" value="Submit">Gửi</button>*@
+                                            <input type="submit" style="background-color:#dfdfdf" value="Lưu" class="btn btn-default" />
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+
+

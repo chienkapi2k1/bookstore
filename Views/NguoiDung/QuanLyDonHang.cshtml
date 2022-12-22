@@ -1,0 +1,257 @@
+﻿@using BookStore.Models;
+@model List<DonHang>
+@{
+    ViewBag.Title = "QuanLyDonHang";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    var i = "";
+    var vb_ten = "";
+    var vb_ngay = "";
+
+    if (ViewBag.Ten != null)
+    {
+        vb_ten = ViewBag.Ten;
+    }
+    if (ViewBag.Ngay != null)
+    {
+        vb_ngay = ViewBag.Ngay;
+    }
+}
+
+@section style{
+    <style>
+        .alert {
+            position: relative;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+        }
+
+        .table-wrap {
+            overflow-x: scroll;
+        }
+
+        .table {
+            min-width: 1000px !important;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            text-align: center;
+            display: inline-block;
+            margin: 0 auto;
+        }
+            /*        table, th, td {
+            border: 1px solid #ccc;
+        }*/
+            .table thead th {
+                border: none;
+                padding: 10px 5px 10px 5px;
+                font-size: 14px;
+                color: #fff;
+                vertical-align: middle;
+            }
+
+            .table tbody tr {
+                margin-bottom: 10px;
+                -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+                -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+                box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+            }
+
+            .table tbody th, .table tbody td {
+                border: none;
+                padding: 2px;
+                font-size: 14px;
+                background: #fff;
+                vertical-align: middle;
+            }
+
+                .table tbody td .close span {
+                    font-size: 12px;
+                    color: #dc3545;
+                }
+    </style>
+}
+
+<main id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 border-right">
+                <h6 style="font-size : 20px;" class="font-weight-medium font-size-5 pt-5 pt-lg-8  mb-2 mb-lg-3">Tài Khoản Của Bạn</h6>
+                <div class="tab-wrapper">
+                    <ul class="my__account-nav nav flex-column mb-0" role="tablist" id="pills-tab">
+                        @if (Session["Role"].ToString() == "ADMIN")
+                        {
+                            <li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0 active" id="pills-one-example1-tab" href="@Url.Action("BangDieuKhien","NguoiDung")" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Bảng Điều Khiển</span>
+                                </a>
+                            </li>
+                        }
+
+                        @*<li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-two-example1-tab" href="#pills-two-example1" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đơn Hàng</span>
+                            </a>
+                        </li>*@
+                        @*<li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" id="pills-three-example1-tab" href="#pills-three-example1" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Tải Xuống</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" id="pills-four-example1-tab" href="#pills-four-example1" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Địa Chỉ</span>
+                                </a>
+                            </li>*@
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChiTietTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chi Tiết Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChinhSuaTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chỉnh Sửa Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("DoiMatKhau","NguoiDung")" role="tab" aria-controls="pills-five-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đổi Mật Khẩu</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-six-example1-tab" href="@Url.Action("DanhSachYeuThich","NguoiDung")" role="tab" aria-controls="pills-six-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Danh Sách Yêu Thích</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" href="@Url.Action("DangXuat", "NguoiDung")">
+                                <span class="font-weight-normal text-gray-600">Đăng Xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab">
+                        <div class="pt-5 pt-lg-8 pl-md-5 pl-lg-9 space-bottom-2 space-bottom-lg-3 mb-xl-1">
+                            <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">Quản Lý Đơn Hàng</h6>
+                            <div class="mb-4">
+                                <p class="mb-0 font-size-2 ml-lg-1 text-gray-600"></p>
+                            </div>
+                            <div class="row no-gutters row-cols-1 row-cols-md-12 row-cols-lg-12">
+                                <div class="row">
+                                    <div class="border py-1 text-center" style="float:left; width:200px; margin:10px;">
+                                        <a href="@Url.Action("QuanLyDonHang","NguoiDung")" class="btn  rounded-circle px-4 mb-2">
+                                            @*btn-primary*@
+                                            <span class=" font-size-10 btn-icon__inner text-primary">
+                                                <img style="width:50px; height:50px;" src="~/Images/icon/list-ul.svg" />
+                                            </span>
+                                            <br />
+                                            <div style="margin-top:20px;" class="font-size-3 mb-xl-1">Danh sách Sách</div>
+                                        </a>
+                                    </div>
+                                    <div class="border py-1 text-center" style="float:left; width:200px; margin:10px;">
+                                        <a href="@Url.Action("DSCTDonHang","NguoiDung")" class="btn  rounded-circle px-4 mb-2">
+                                            @*btn-primary*@
+                                            <span class=" font-size-10 btn-icon__inner text-primary">
+                                                <img style="width:50px; height:50px;" src="~/Images/icon/list-ul.svg" />
+                                            </span>
+                                            <br />
+                                            <div style="margin-top:20px;" class="font-size-3 mb-xl-1">Danh Sách Chi Tiết Hóa Đơn</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="site-search ml-xl-0 ml-md-auto w-r-100 my-2 my-xl-0">
+                                <form class="form-inline" style="padding:30px 0;">
+                                    <div class="input-group" style="width:1000px;">
+                                        <div class="input-group-prepend">
+                                            <i class="glph-icon flaticon-loupe input-group-text py-2d75 bg-white-100 border-white-100"></i>
+                                        </div>
+                                        @if (vb_ten != "")
+                                        {
+                                            <input value="@vb_ten" name="ten" id="ten" style="width:50%;" class="form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100" type="search" placeholder="Tìm kiếm Khách Hàng ..." aria-label="Search">
+                                        }
+                                        else
+                                        {
+                                            <input name="ten" id="ten" style="width:50%;" class="form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100" type="search" placeholder="Tìm kiếm Khách Hàng ..." aria-label="Search">
+                                        }
+
+                                        @if (vb_ngay != "")
+                                        {
+                                            <input value="@vb_ngay" name="ngay" id="ngay" style="margin: 0 15px; width: 50%;" class="form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100" type="search" placeholder="Thời gian ... (vd: 31/12/2021 10:31:50 CH)" aria-label="Search">
+                                        }
+                                        else
+                                        {
+                                            <input name="ngay" id="ngay" style="margin: 0 15px; width: 50%;" class="form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100" type="search" placeholder="Thời gian ... (vd: 09/05/2022 10:31:50 CH)" aria-label="Search">
+                                        }
+                                    </div>
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                </form>
+                            </div>
+                            <h6 style="font-size:26px;" class="font-weight-medium font-size-7 ml-lg-1 mb-lg-3 pb-xl-1">Danh Sách Đơn Hàng</h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-wrap">
+                                        <table class="table" style="width:100%;">
+                                            <thead class="thead-dark">
+                                                <tr >
+                                                    <th style="width: 10%;">Mã Đơn Hàng</th>
+                                                    <th style="width: 15%;">Khách Hàng</th>
+                                                    <th style="width: 20%;">Tổng Tiền</th>
+                                                    <th style="width: 20%;">Ngày Tạo</th>
+                                                    <th style="width: 25%;">Ghi Chú</th>
+                                                    <th style="width: 10%;">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    foreach (var item in Model)
+                                                    {
+                                                        <tr class="alert" role="alert">
+                                                            <th scope="row">@item.MaDH</th>
+                                                            @foreach(var kh in ViewBag.KhachHang)
+                                                            {
+                                                                if(item.MaNguoiDung == kh.MaNguoiDung) 
+                                                                {
+                                                                    <td>@kh.HoTen</td>
+                                                                }
+                                                            }
+                                                        <td>@String.Format("{0:N0}", @item.TongTien) ₫</td>
+                                                            <td>@item.NgayTao</td>
+                                                            @if (@item.GhiChu == null)
+                                                            {
+                                                                <td>Trống</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@item.GhiChu</td>
+                                                            }
+                                                            
+                                                            @*<td style="width:100px;">
+                                                                <a href="@Url.Action("XoaSach","NguoiDung", new { @MaDH = item.MaDH })" style="width:40px;height:40px;">
+                                                                    <button style="width:40px;height:40px; font-size:12px;" type="button" class="btn btn-dark">
+                                                                        <b style="margin-left:-10px;">Xóa</b>
+                                                                    </button>
+                                                                </a>
+                                                            </td>*@
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

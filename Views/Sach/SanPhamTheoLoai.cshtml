@@ -1,0 +1,112 @@
+﻿@using BookStore.Models;
+@model List<Sach>
+@{
+    ViewBag.Title = ViewBag.TenTheLoai;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="site-content space-bottom-3" id="content">
+    <div class="container">
+        <div class="col-12">
+            <div id="primary" class="content-area order-2">
+
+                <div class="shop-control-bar d-lg-flex justify-content-between align-items-center mb-5 text-center text-md-left">
+                    <h3 style="padding:30px 0 0 30px;">Thể loại : @ViewBag.TenTheLoai</h3>
+                </div>
+                @{
+                    if (ViewBag.lstSanPham == null)
+                    {
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab">
+
+                                <ul class="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left mb-6">
+                                    @{int i = -1;
+                                        foreach (var item in Model)
+                                        {
+                                            i++;
+                                            <li class="product col">
+                                                <div class="product__inner overflow-hidden p-3 p-md-4d875">
+                                                    <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
+                                                        <div class="woocommerce-loop-product__thumbnail">
+                                                            <a href="@Url.Action("ChiTietSach","Sach", new {@MaSach=item.MaSach})" class="d-block"><img style="width:240px; height:350px" src="@Url.Content("~/Images/book/" + item.Anh)" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
+                                                        </div>
+                                                        <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
+                                                            <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="single-product-v1.html">Paperback</a></div>
+                                                            <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="single-product-v1.html">@item.TenSach</a></h2>
+                                                            <div class="font-size-2  mb-1 text-truncate"><a href="https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/others/authors-single.html" class="text-gray-700">@item.TacGia</a></div>
+                                                            <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                                                @if (item.GiamGia == 0)
+                                                                {
+                                                                    <span class="woocommerce-Price-amount amount">
+                                                                        @String.Format("{0:N0}", @item.GiaTriSach) 
+                                                                        <span class="woocommerce-Price-currencySymbol"> ₫</span>
+                                                                    </span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="woocommerce-Price-amount amount" style="width:100%;">
+                                                                        <span style="text-decoration: line-through; font-size:12px;">
+                                                                            @String.Format("{0:N0}", @item.GiaTriSach) ₫
+                                                                        </span>
+                                                                        <span style="color:limegreen; float:right">
+                                                                            Giảm @item.GiamGia%
+                                                                        </span>
+                                                                        <br />
+                                                                        @String.Format("{0:N0}", @ViewBag.GiaSach[i]) 
+                                                                        <span class="woocommerce-Price-currencySymbol"> ₫</span>
+                                                                    </span>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <div class="product__hover d-flex align-items-center">
+                                                            <a href="@Url.Action("ThemSach_GioHang","GioHang", new{@MaSach = item.MaSach , @Url = Request.Url.ToString()})" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="" data-original-title="Thêm Vào Giỏ Hàng">
+                                                                <span class="product__add-to-cart">+ Giỏ Hàng</span>
+                                                                <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
+                                                            </a>
+                                                            @if (Session["TaiKhoan"] == null)
+                                                            {
+                                                                <a href="@Url.Action("DangNhap","NguoiDung")" class="h-p-bg btn btn-outline-primary border-0">
+                                                                    <i class="flaticon-heart"></i>
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <form method="post" action="@Url.Action("ThemVaoDanhSachYeuThich", "NguoiDung", new { @MaSach = item.MaSach, @Url = Request.Url.ToString()  })">
+                                                                    <button type="submit" class="h-p-bg btn btn-outline-primary border-0"><i class="flaticon-heart"></i></button>
+                                                                </form>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+                        @*<nav aria-label="Page navigation example">
+                            <ul class="pagination pagination__custom justify-content-md-center flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
+                                <li class="flex-shrink-0 flex-md-shrink-1 page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="flex-shrink-0 flex-md-shrink-1 page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="flex-shrink-0 flex-md-shrink-1 page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="flex-shrink-0 flex-md-shrink-1 page-item active" aria-current="page"><a class="page-link" href="#">3</a></li>
+                                <li class="flex-shrink-0 flex-md-shrink-1 page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="flex-shrink-0 flex-md-shrink-1 page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="flex-shrink-0 flex-md-shrink-1 page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>*@
+                    }
+                    else
+                    {
+                        <h4 style="text-align:center;">Không có sách thuộc thể loại này </h4>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

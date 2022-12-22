@@ -1,0 +1,159 @@
+﻿@model BookStore.Models.NguoiDung
+@{
+    ViewBag.Title = "ChiTietTaiKhoan";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<main id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 border-right">
+                <h6 style="font-size : 20px;" class="font-weight-medium font-size-7 pt-5 pt-lg-8  mb-5 mb-lg-7">Tài Khoản Của Bạn</h6>
+                <div class="tab-wrapper">
+                    <ul class="my__account-nav nav flex-column mb-0" role="tablist" id="pills-tab">
+                        @if (Session["Role"].ToString() == "ADMIN")
+                        {
+                            <li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0 active" id="pills-one-example1-tab" href="@Url.Action("BangDieuKhien","NguoiDung")" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Bảng Điều Khiển</span>
+                                </a>
+                            </li>
+                        }
+                        @*<li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-two-example1-tab" href="@Url.Action("DonHang","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đơn Hàng</span>
+                            </a>
+                        </li>*@
+                        @*<li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-three-example1-tab" href="#pills-three-example1" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Tải Xuống</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-four-example1-tab" href="#pills-four-example1" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Địa Chỉ</span>
+                            </a>
+                        </li>*@
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChiTietTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chi Tiết Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChinhSuaTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chỉnh Sửa Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("DoiMatKhau","NguoiDung")" role="tab" aria-controls="pills-five-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đổi Mật Khẩu</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-six-example1-tab" href="@Url.Action("DanhSachYeuThich","NguoiDung")" role="tab" aria-controls="pills-six-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Danh Sách Yêu Thích</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" href="@Url.Action("DangXuat", "NguoiDung")">
+                                <span class="font-weight-normal text-gray-600">Đăng Xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="tab-content" id="pills-tabContent">
+
+                    <div id="pills-five-example1" role="tabpanel" aria-labelledby="pills-five-example1-tab">
+                        <div class="border-bottom mb-6 pb-6 mb-lg-8 pb-lg-9">
+                            <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9">
+                                <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">Chi Tiết Tài Khoản</h6>
+                                
+                                <div class="row">
+                                    <div class="col-xl-8 offset-xl-1">
+                                        <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab pt-9">
+
+                                            <div class="table-responsive mb-4">
+
+                                                <div>
+                                                    @if (Model.GioiTinh == null)
+                                                    {
+                                                        <img src="@Url.Content("~/Images/avartar/khongxacdinh.png")" class="rounded-circle shadow-4" style="width: 150px;" alt="Avatar" />
+
+                                                    }
+                                                    @if (Model.GioiTinh == "Nam")
+                                                    {
+                                                        <img src="@Url.Content("~/Images/avartar/nam.png")" class="rounded-circle shadow-4" style="width: 150px;" alt="Avatar" />
+
+                                                    }
+                                                    @if (Model.GioiTinh == "Nữ")
+                                                    {
+                                                        <img src="@Url.Content("~/Images/avartar/nu.png")" class="rounded-circle shadow-4" style="width: 150px;" alt="Avatar" />
+                                                    }
+                                                <a href="@Url.Action("ChinhSuaTaiKhoan", "NguoiDung")" style="color:white; margin-left:20%;" class="btn btn-dark rounded-0 btn-wide py-3 font-weight-medium">
+                                                    Edit
+                                                </a>
+                                                </div>
+                                                <div style="margin-top:20px;" class="font-weight-medium font-size-22 mb-4 pb-xl-1">@Model.HoTen <div style="float:right; padding-right:35%;">#@Model.TaiKhoan</div></div>
+                                                <table class="table table-hover table-borderless">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th class="px-4 px-xl-5">Giới Tính</th>
+                                                            @if (@Model.GioiTinh == null)
+                                                            {
+                                                                <td>Trống</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@Model.GioiTinh</td>
+                                                            }
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="px-4 px-xl-5">Tuổi: </th>
+                                                            @if (@Model.Tuoi == null)
+                                                            {
+                                                                <td>Trống</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@Model.Tuoi</td>
+                                                            }
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="px-4 px-xl-5">Email:</th>
+                                                            <td>@Model.Email</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="px-4 px-xl-5">Số Điện Thoại:</th>
+                                                            <td>@Model.SDT</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="px-4 px-xl-5">Địa Chỉ:</th>
+                                                            @if (@Model.DiaChi == null)
+                                                            {
+                                                                <td>Trống</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@Model.DiaChi</td>
+                                                            }
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

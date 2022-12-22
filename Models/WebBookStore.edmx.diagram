@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9b71694332a74000a027ff53129bd280" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="BookStoreModel.ChiTietDonHang" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.ChiTietTheLoai" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.DanhGiaSach" Width="1.5" PointX="7.875" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.DanhSachYeuThich" Width="1.5" PointX="0.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.DonHang" Width="1.5" PointX="5.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.NguoiDung" Width="1.5" PointX="8" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.Sach" Width="1.5" PointX="0.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.sysdiagrams" Width="1.5" PointX="12.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.TTDH" Width="1.5" PointX="3.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.TheLoai" Width="1.5" PointX="5.125" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.ThongTinHeThong" Width="1.5" PointX="10.375" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="BookStoreModel.FK_ChiTietDonHang_DonHang" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreModel.FK_ChiTietDonHang_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreModel.FK_ChiTietTheLoai_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreModel.FK_ChiTietTheLoai_TheLoai" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreModel.FK_DanhGiaSach_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreModel.FK_DanhGiaSach_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreModel.FK_DanhSachYeuThich_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreModel.FK_DanhSachYeuThich_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreModel.FK_DonHang_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStoreModel.FK_TTDH_DonHang" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

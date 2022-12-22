@@ -1,0 +1,11 @@
+﻿@using BookStore.Models;
+@model List<TheLoai>
+
+@foreach (var item in Model)
+{
+    <li>
+        <a href="@Url.Action("SanPhamTheoLoai", "Sach", new {@MaTheLoai = item.MaTheLoai})" class="dropdown-item link-black-100">@item.TenTheLoai</a>
+    </li>
+}
+
+

@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@if (Session["HoTen"] == null)
+{
+    <div style="margin-top: 3%; padding: 0 20% 0 20%;">
+        <a href="@Url.Action("DangNhap","NguoiDung")" style="float: left;" class="js-animation-link btn btn-block py-3 rounded-0 btn-outline-dark font-weight-medium" data-target="#signup" data-link-group="idForm" data-animation-in="fadeIn">Đăng Nhập</a>
+        <a href="@Url.Action("DangKy","NguoiDung")" style="float: left;" class=" btn btn-block py-3 rounded-0 btn-outline-dark font-weight-medium" data-link-group="idForm" data-animation-in="fadeIn">Đăng Ký</a>
+
+    </div>
+
+    <form action="@Url.Action("DangNhap", "NguoiDung")" method="post" style="margin-top:15%;">
+        <div id="" style=" width:50%;margin:0 25% 0 25%;" data-target-group="idForm">
+
+            <header class="border-bottom px-4 px-md-6 py-4">
+                <h2 class="font-size-3 mb-0 d-flex align-items-center"><i class="flaticon-user mr-3 font-size-5"></i>Tài Khoản Của Bạn</h2>
+            </header>
+
+            <div class="p-4 p-md-6">
+                @if (ViewBag.DangNhapThatBai != null && ViewBag.DangNhapThatBai != "")
+                {
+                    <span style="color:red; font-size:85%;">@ViewBag.DangNhapThatBai</span>
+                }
+
+                <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                        <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Tài Khoản *</label>
+                        <input class="form-control rounded-0 height-4 px-4" name="TaiKhoan" id="TaiKhoan" placeholder="" aria-label="" aria-describedby="signinEmailLabel1" required>
+
+                    </div>
+                </div>
+
+
+                <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                        <label id="signinPasswordLabel" class="form-label" for="signinPassword">Mật Khẩu *</label>
+                        <input type="password" class="form-control rounded-0 height-4 px-4" name="MatKhau" id="MatKhau" placeholder="" aria-label="" aria-describedby="signinPasswordLabel" required>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mb-5 align-items-center">
+
+                    @*<div class="js-form-message">
+                <div class="custom-control custom-checkbox d-flex align-items-center text-muted">
+                    <input type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox" required>
+                    <label class="custom-control-label" for="termsCheckbox">
+                        <span class="font-size-2 text-secondary-gray-700">
+                            Remember me
+                        </span>
+                    </label>
+                </div>
+            </div>*@
+
+                    <a class="js-animation-link text-dark font-size-2 t-d-u link-muted font-weight-medium" href="javascript:;" data-target="#forgotPassword" data-link-group="idForm" data-animation-in="fadeIn">Forgot Password?</a>
+                </div>
+                <div class="mb-4d75">
+                    <button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Đăng Nhập</button>
+                </div>
+            </div>
+        </div>
+    </form>
+}

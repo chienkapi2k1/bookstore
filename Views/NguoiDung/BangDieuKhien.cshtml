@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "BangDieuKhien";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<main id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 border-right">
+                <h6 style="font-size : 20px;" class="font-weight-medium font-size-7 pt-5 pt-lg-8  mb-5 mb-lg-7">Tài Khoản Của Bạn</h6>
+                <div class="tab-wrapper">
+                    <ul class="my__account-nav nav flex-column mb-0" role="tablist" id="pills-tab">
+                        @if (Session["Role"].ToString() == "ADMIN")
+                        {
+                            <li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0 active" id="pills-one-example1-tab" href="@Url.Action("BangDieuKhien","NguoiDung")" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Bảng Điều Khiển</span>
+                                </a>
+                            </li>
+                        }
+
+                        @*<li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-two-example1-tab" href="#pills-two-example1" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đơn Hàng</span>
+                            </a>
+                        </li>*@
+                        @*<li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" id="pills-three-example1-tab" href="#pills-three-example1" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Tải Xuống</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-0">
+                                <a class="nav-link d-flex align-items-center px-0" id="pills-four-example1-tab" href="#pills-four-example1" role="tab" aria-selected="false">
+                                    <span class="font-weight-normal text-gray-600">Địa Chỉ</span>
+                                </a>
+                            </li>*@
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChiTietTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chi Tiết Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("ChinhSuaTaiKhoan","NguoiDung")" role="tab" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Chỉnh Sửa Tài Khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="@Url.Action("DoiMatKhau","NguoiDung")" role="tab" aria-controls="pills-five-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Đổi Mật Khẩu</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" id="pills-six-example1-tab" href="@Url.Action("DanhSachYeuThich","NguoiDung")" role="tab" aria-controls="pills-six-example1" aria-selected="false">
+                                <span class="font-weight-normal text-gray-600">Danh Sách Yêu Thích</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0">
+                            <a class="nav-link d-flex align-items-center px-0" href="@Url.Action("DangXuat", "NguoiDung")">
+                                <span class="font-weight-normal text-gray-600">Đăng Xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab">
+                        <div class="pt-5 pt-lg-8 pl-md-5 pl-lg-9 space-bottom-2 space-bottom-lg-3 mb-xl-1">
+                            <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">Bảng Điều Khiển</h6>
+                            <div class="mb-4">
+                                <p class="mb-0 font-size-2 ml-lg-1 text-gray-600"></p>
+                            </div>
+                            <div class="row no-gutters row-cols-1 row-cols-md-2 row-cols-lg-3">
+                                <div class="col">
+                                    <div class="border  py-6 text-center">
+                                        <a href="@Url.Action("QuanLySach","NguoiDung")" class="btn bg-gray-200 rounded-circle px-4 mb-2">@*btn-primary*@
+                                            <span class="flaticon-order font-size-10 btn-icon__inner text-primary"></span>
+                                        </a>
+                                        <div class="font-size-3 mb-xl-1">Quản Lý Sách</div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="border border-left-0 py-6 text-center">
+                                        <a href="@Url.Action("QuanLyDonHang","NguoiDung")" class="btn bg-gray-200 rounded-circle px-4 mb-2">
+                                            <span class="flaticon-order font-size-10 btn-icon__inner text-primary"></span>
+                                            @*<span class="flaticon-cloud-computing font-size-10 btn-icon__inner text-primary"></span>*@
+                                        </a>
+                                        <div class="font-size-3 mb-xl-1">Quản Lí Đơn Hàng</div>
+                                    </div>
+                                </div>
+                                @*<div class="col">
+                                    <div class="border border-left-0 py-6 text-center">
+                                        <a href="#" class="btn bg-gray-200 rounded-circle px-4 mb-2">
+                                            <span class="flaticon-place font-size-10 btn-icon__inner text-primary"></span>
+                                        </a>
+                                        <div class="font-size-3 mb-xl-1">Addresses</div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="border py-6 text-center">
+                                        <a href="#" class="btn bg-gray-200 rounded-circle px-4 mb-2">
+                                            <span class="flaticon-user-1 font-size-10 btn-icon__inner text-primary"></span>
+                                        </a>
+                                        <div class="font-size-3 mb-xl-1">Account Details</div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="border border-left-0 py-6 text-center">
+                                        <a href="#" class="btn bg-gray-200  rounded-circle px-4 mb-2">
+                                            <span class="flaticon-heart font-size-10 btn-icon__inner text-primary"></span>
+                                        </a>
+                                        <div class="font-size-3 mb-xl-1">Wishlist</div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="border border-left-0 py-6 text-center">
+                                        <a href="#" class="btn bg-gray-200 rounded-circle px-4 mb-2">
+                                            <span class="flaticon-exit font-size-10 btn-icon__inner text-primary"></span>
+                                        </a>
+                                        <div class="font-size-3 mb-xl-1">Orders</div>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
